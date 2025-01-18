@@ -1,6 +1,10 @@
+import MainNav from "@/components/common/main-nav";
+
 const DocsPage = () => {
 	return (
-		<div>page</div>
+		<div>
+			<MainNav />
+		</div>
 	)
 }
 

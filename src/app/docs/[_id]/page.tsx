@@ -1,18 +1,19 @@
 import Editor from './editor';
+import DocsNav from './navbar';
 
 type docPageIDProps = {
     params: Promise<{ _id: string }>;
 }
 
-const page = async ({params}: docPageIDProps) => {
-    const {_id} = await params;
+const page = async ({ params }: docPageIDProps) => {
+    const { _id } = await params;
 
     return (
         <div className="">
-            <h2>Docs ID: {_id}</h2>
-            <Editor/>
+            <DocsNav />
+            <Editor />
         </div>
     )
 }
 
-export default page;
+export default page;    
