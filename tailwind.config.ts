@@ -14,6 +14,7 @@ export default {
                 s2: "#C7C7C7",
                 s3: "#F9FBFD",
                 s4: "#f0f4f9",
+                s5: "#fafbfd",
                 p1: "#0b57d0",
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
