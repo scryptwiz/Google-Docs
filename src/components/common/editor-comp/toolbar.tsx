@@ -1,9 +1,10 @@
 "use client";
 
 import { LucideIcon } from "lucide-react";
-import ToolbarButton from "./toolbarButton";
+import ToolbarButton from "./toolbar-button";
 import { Separator } from "@/components/ui/separator";
-import ToolData from "./toolData";
+import ToolData from "./tool-data";
+import { FontFamilyDropdown } from "./font-family-dropdown";
 
 interface ToolbarProps {
 	tools: {
@@ -25,7 +26,17 @@ const Toolbar = () => {
 					<ToolbarButton key={tool.name} {...tool} />
 				))}
 				<Separator orientation="vertical" className="h-6 bg-neutral-300" />
+				<FontFamilyDropdown />
+				<Separator orientation="vertical" className="h-6 bg-neutral-300" />
 				{tools[1].map((tool) => (
+					<ToolbarButton key={tool.name} {...tool} />
+				))}
+				<Separator orientation="vertical" className="h-6 bg-neutral-300" />
+				{tools[2].map((tool) => (
+					<ToolbarButton key={tool.name} {...tool} />
+				))}
+				<Separator orientation="vertical" className="h-6 bg-neutral-300" />
+				{tools[3].map((tool) => (
 					<ToolbarButton key={tool.name} {...tool} />
 				))}
 			</div>

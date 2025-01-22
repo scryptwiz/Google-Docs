@@ -1,8 +1,7 @@
 "use client";
 
-// Global imports
 import { EditorStore } from "@/hooks/editor-store";
-import { Bold, Italic, PaintRoller, Printer, Redo2, Search, SpellCheck, Underline, Undo2 } from "lucide-react";
+import { Bold, Code, Italic, LayoutList, List, MessageSquarePlus, PaintRoller, Printer, Redo2, RemoveFormatting, Search, SpellCheck, Underline, Undo2 } from "lucide-react";
 
 const ToolData = () => {
 	const { editor } = EditorStore();
@@ -63,6 +62,33 @@ const ToolData = () => {
 				onClick: () => editor?.chain().focus().toggleUnderline().run(),
 			},
 		],
+		[
+			{
+				name: "Comment",
+				icon: MessageSquarePlus,
+				onClick: () => console.log("comment"),
+			},
+			{
+				name: "Code",
+				icon: Code,
+				disable: !editor?.can().chain().focus().toggleCode().run(),
+				onClick: () => editor?.chain().focus().toggleCode().run(),
+				active: editor?.isActive('code'),
+			},
+			{
+				name: "Clear Formatting",
+				icon: RemoveFormatting,
+				onClick: () => editor?.chain().focus().unsetAllMarks().run(),
+			}
+		],
+		[
+			{
+				name: "Task List",
+				icon: LayoutList,
+				onClick: () => editor?.chain().focus().toggleTaskList().run(),
+				active: editor?.isActive('taskList'),
+			}
+		]
 	];
 
 	return tools;

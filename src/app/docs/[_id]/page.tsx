@@ -1,6 +1,6 @@
-import Editor from './components/editor';
-import DocsNav from './components/navbar';
-import Toolbar from './components/toolbar';
+import Editor from "@/components/common/editor-comp/editor";
+import DocsNav from "@/components/common/editor-comp/navbar";
+import Toolbar from "@/components/common/editor-comp/toolbar";
 
 type docPageIDProps = {
     params: Promise<{ _id: string }>;
