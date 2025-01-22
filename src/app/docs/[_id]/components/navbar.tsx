@@ -9,7 +9,7 @@ import { UserButton } from "@clerk/nextjs";
 
 const DocsNav = () => {
 	return (
-		<nav className="px-5 py-4 bg-white">
+		<nav className="px-5 py-4 bg-white print:hidden">
 			<div className="flex justify-between items-center">
 				<div className="flex items-center gap-2">
 					<Link href="/docs">

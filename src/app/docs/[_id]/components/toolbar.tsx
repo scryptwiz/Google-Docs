@@ -1,7 +1,9 @@
-"use client"
+"use client";
 
 import { LucideIcon } from "lucide-react";
 import ToolbarButton from "./toolbarButton";
+import { Separator } from "@/components/ui/separator";
+import ToolData from "./toolData";
 
 interface ToolbarProps {
 	tools: {
@@ -10,19 +12,25 @@ interface ToolbarProps {
 		onClick: () => void;
 		active?: boolean;
 		disabled?: boolean;
-	}[];
+	}[][];
 }
 
-const Toolbar: React.FC<ToolbarProps> = ({ tools }) => {
+const Toolbar = () => {
+	const tools = ToolData();
+
 	return (
-		<div className="bg-white px-5">
+		<div className="bg-white px-5 print:hidden">
 			<div className="w-full rounded-full bg-s4 px-3 gap-x-0.5 py-1 flex items-center overflow-x-auto">
-				{tools.map((tool) => (
+				{tools[0].map((tool) => (
+					<ToolbarButton key={tool.name} {...tool} />
+				))}
+				<Separator orientation="vertical" className="h-6 bg-neutral-300" />
+				{tools[1].map((tool) => (
 					<ToolbarButton key={tool.name} {...tool} />
 				))}
 			</div>
 		</div>
 	);
-}
+};
 
 export default Toolbar;

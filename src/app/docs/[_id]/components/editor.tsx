@@ -11,6 +11,7 @@ import TableHeader from '@tiptap/extension-table-header'
 import TableRow from '@tiptap/extension-table-row'
 import Image from '@tiptap/extension-image'
 import ImageResize from 'tiptap-extension-resize-image'
+import Underline from '@tiptap/extension-underline'
 
 // load all languages with "all" or common languages with "common"
 import { all, createLowlight } from 'lowlight'
@@ -18,40 +19,49 @@ import css from 'highlight.js/lib/languages/css'
 import js from 'highlight.js/lib/languages/javascript'
 import ts from 'highlight.js/lib/languages/typescript'
 import html from 'highlight.js/lib/languages/xml'
+import { EditorStore } from '@/hooks/editor-store'
 
-type editorsProps = {}
+const Editor = () => {
+  const { setEditor } = EditorStore();
 
-const Editor = (props: editorsProps) => {
-    // create a lowlight instance with all languages loaded
-    const lowlight = createLowlight(all)
+  // create a lowlight instance with all languages loaded
+  const lowlight = createLowlight(all)
 
-    // This is only an example, all supported languages are already loaded above
-    // but you can also register only specific languages to reduce bundle-size
-    lowlight.register('html', html)
-    lowlight.register('css', css)
-    lowlight.register('js', js)
-    lowlight.register('ts', ts)
+  // This is only an example, all supported languages are already loaded above
+  // but you can also register only specific languages to reduce bundle-size
+  lowlight.register('html', html)
+  lowlight.register('css', css)
+  lowlight.register('js', js)
+  lowlight.register('ts', ts)
 
-    const editor = useEditor({
-        editorProps: {
-            attributes: {
-                style: 'padding-left: 62px; paddinf-right: 62px;',
-                class: 'focus:outline-none print:border-0 bg-white border border-s2 flex flex-col min-h-[1056px] w-[816px] pt-10 pr-14 pb-10 cursor-text',
-            },
-        },
-        extensions: [
-            StarterKit,
-            TaskList,
-            TableRow,
-            TableHeader,
-            TableCell,
-            Image,
-            ImageResize,
-            TaskItem.configure({ nested: true }),
-            CodeBlockLowlight.configure({ lowlight }),
-            Table.configure({ resizable: true }),
-        ],
-        content: `
+  const editor = useEditor({
+    onCreate ({ editor }) { setEditor(editor); },
+    onDestroy () { setEditor(null) },
+    onTransaction ({ editor }) { setEditor(editor) },
+    onFocus ({ editor }) { setEditor(editor) },
+    onBlur ({ editor }) { setEditor(editor) },
+    onUpdate ({ editor }) { setEditor(editor) },
+    onContentError ({ editor }) { setEditor(editor) },
+    editorProps: {
+      attributes: {
+        style: 'padding-left: 62px; padding-right: 62px;',
+        class: 'focus:outline-none print:border-0 bg-white border border-s2 flex flex-col min-h-[1056px] w-[816px] pt-10 pr-14 pb-10 cursor-text',
+      },
+    },
+    extensions: [
+      StarterKit,
+      TaskList,
+      TableRow,
+      TableHeader,
+      TableCell,
+      Image,
+      ImageResize,
+      Underline,
+      TaskItem.configure({ nested: true }),
+      CodeBlockLowlight.configure({ lowlight }),
+      Table.configure({ resizable: true }),
+    ],
+    content: `
             <h1>Hello World! 🌎️</h1>
             <blockquote>Nothing is impossible, the word itself says “I’m possible!” </blockquote>
             <pre><code class="language-javascript">for (var i=1; i <= 20; i++) {
@@ -81,15 +91,15 @@ const Editor = (props: editorsProps) => {
           </tbody>
         </table>
         `,
-    })
+  })
 
-    return (
-        <div className="size-full overflow-x-auto bg-s3 px-4 print:p-0 print:bg-white print:overflow-x-visible">
-            <div className="min-w-max flex justify-center w-[816px] print:py-0 py-4 mx-auto print:w-full print:min-w-0">
-                <EditorContent editor={editor} />
-            </div>
-        </div>
-    )
+  return (
+    <div className="size-full overflow-x-auto bg-s3 px-4 print:p-0 print:bg-white print:overflow-x-visible">
+      <div className="min-w-max flex justify-center w-[816px] print:py-0 py-4 mx-auto print:w-full print:min-w-0">
+        <EditorContent editor={editor} />
+      </div>
+    </div>
+  )
 }
 
 export default Editor;

@@ -1,7 +1,6 @@
 import Editor from './components/editor';
 import DocsNav from './components/navbar';
 import Toolbar from './components/toolbar';
-import { tools } from './components/toolData';
 
 type docPageIDProps = {
     params: Promise<{ _id: string }>;
@@ -13,10 +12,10 @@ const page = async ({ params }: docPageIDProps) => {
     return (
         <div className="min-h-screen bg-s5">
             <DocsNav />
-            <Toolbar tools={tools} />
+            <Toolbar />
             <Editor />
         </div>
     )
 }
 
-export default page;    
+export default page;
