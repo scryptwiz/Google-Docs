@@ -5,6 +5,7 @@ import ToolbarButton from "./toolbar-button";
 import { Separator } from "@/components/ui/separator";
 import ToolData from "./tool-data";
 import { FontFamilyDropdown } from "./font-family-dropdown";
+import { TextStylesDropdown } from "./text-styles-dropdown";
 
 interface ToolbarProps {
 	tools: {
@@ -25,6 +26,8 @@ const Toolbar = () => {
 				{tools[0].map((tool) => (
 					<ToolbarButton key={tool.name} {...tool} />
 				))}
+				<Separator orientation="vertical" className="h-6 bg-neutral-300" />
+				<TextStylesDropdown />
 				<Separator orientation="vertical" className="h-6 bg-neutral-300" />
 				<FontFamilyDropdown />
 				<Separator orientation="vertical" className="h-6 bg-neutral-300" />
