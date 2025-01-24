@@ -101,8 +101,26 @@ body {
     font-size: 1.1rem; 
   }
 
-  h4, h5, h6 { 
+  h4 { 
     font-size: 1rem; 
+  }
+
+  h5 { 
+    font-size: 0.9rem; 
+  }
+
+  h6 { 
+    font-size: 0.8rem; 
+  }
+
+  /* Link styles */
+  a {
+    color: #0b57d0;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   /* Block Quote */
