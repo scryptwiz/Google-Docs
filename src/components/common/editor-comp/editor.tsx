@@ -17,6 +17,7 @@ import FontFamily from '@tiptap/extension-font-family'
 import { Color } from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
 import Link from '@tiptap/extension-link'
+import TextAlign from '@tiptap/extension-text-align'
 
 // load all languages with "all" or common languages with "common"
 import { all, createLowlight } from 'lowlight'
@@ -65,6 +66,9 @@ const Editor = () => {
       FontFamily,
       TextStyle,
       Color,
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
+      }),
       Highlight.configure({ multicolor: true }),
       TaskItem.configure({ nested: true }),
       CodeBlockLowlight.configure({ lowlight }),

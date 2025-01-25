@@ -9,6 +9,7 @@ import { TextStylesDropdown } from "./toolbar-buttons/text-styles-dropdown";
 import { ColorButton, HighlightButton } from "./toolbar-buttons/color-button";
 import { LinkButton } from "./toolbar-buttons/link-button";
 import { ImageButton } from "./toolbar-buttons/image-button";
+import { AlignmentButtons } from "./toolbar-buttons/alignment-buttons";
 
 interface ToolbarProps {
 	tools: {
@@ -46,6 +47,7 @@ const Toolbar = () => {
 				))}
 				<ImageButton />
 				<Separator orientation="vertical" className="h-6 bg-neutral-300" />
+				<AlignmentButtons />
 				{tools[3].map((tool) => (
 					<ToolbarButton key={tool.name} {...tool} />
 				))}
