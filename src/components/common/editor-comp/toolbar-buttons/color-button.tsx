@@ -11,7 +11,6 @@ export const ColorButton = () => {
 
 	const onChange = (color: ColorResult) => {
 		editor?.chain().focus().setColor(color.hex).run();
-		setOpen(!open);
 	}
 
 	return (
@@ -31,7 +30,7 @@ export const ColorButton = () => {
 
 export const HighlightButton = () => {
 	const { editor } = EditorStore();
-	const value = editor?.getAttributes("highlight").color || "#fff";
+	const value = editor?.getAttributes("highlight").color || "transparent";
 	const [open, setOpen] = useState(false);
 
 	const onChange = (color: ColorResult) => {

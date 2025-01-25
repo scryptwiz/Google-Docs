@@ -61,6 +61,11 @@ const ToolData = () => {
 				active: editor?.isActive("underline"),
 				onClick: () => editor?.chain().focus().toggleUnderline().run(),
 			},
+			{
+				name: "Clear Formatting",
+				icon: RemoveFormatting,
+				onClick: () => editor?.chain().focus().unsetAllMarks().run(),
+			}
 		],
 		[
 			{
@@ -75,11 +80,6 @@ const ToolData = () => {
 				onClick: () => editor?.chain().focus().toggleCode().run(),
 				active: editor?.isActive('code'),
 			},
-			{
-				name: "Clear Formatting",
-				icon: RemoveFormatting,
-				onClick: () => editor?.chain().focus().unsetAllMarks().run(),
-			}
 		],
 		[
 			{

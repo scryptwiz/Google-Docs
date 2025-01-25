@@ -4,9 +4,11 @@ import { LucideIcon } from "lucide-react";
 import ToolbarButton from "./toolbar-button";
 import { Separator } from "@/components/ui/separator";
 import ToolData from "./tool-data";
-import { FontFamilyDropdown } from "./font-family-dropdown";
-import { TextStylesDropdown } from "./text-styles-dropdown";
-import { ColorButton, HighlightButton } from "./color-button";
+import { FontFamilyDropdown } from "./toolbar-buttons/font-family-dropdown";
+import { TextStylesDropdown } from "./toolbar-buttons/text-styles-dropdown";
+import { ColorButton, HighlightButton } from "./toolbar-buttons/color-button";
+import { LinkButton } from "./toolbar-buttons/link-button";
+import { ImageButton } from "./toolbar-buttons/image-button";
 
 interface ToolbarProps {
 	tools: {
@@ -38,9 +40,11 @@ const Toolbar = () => {
 				<ColorButton />
 				<HighlightButton />
 				<Separator orientation="vertical" className="h-6 bg-neutral-300" />
+				<LinkButton />
 				{tools[2].map((tool) => (
 					<ToolbarButton key={tool.name} {...tool} />
 				))}
+				<ImageButton />
 				<Separator orientation="vertical" className="h-6 bg-neutral-300" />
 				{tools[3].map((tool) => (
 					<ToolbarButton key={tool.name} {...tool} />
