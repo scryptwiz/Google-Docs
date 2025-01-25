@@ -12,8 +12,8 @@ export const ImageButton = () => {
 	const [imageUri, setImageUri] = useState("");
 	const [openDialog, setOpenDialog] = useState(false);
 	const [error, setError] = useState<string | null>(null);
-	const [isValidImage, setIsValidImage] = useState(false); // Tracks if the image URL is valid
-	const [isValidating, setIsValidating] = useState(false); // Tracks if validation is in progress
+	const [isValidImage, setIsValidImage] = useState(false);
+	const [isValidating, setIsValidating] = useState(false);
 
 	const onchange = (src: string) => {
 		editor?.chain().focus().setImage({ src }).run();
@@ -78,11 +78,11 @@ export const ImageButton = () => {
 					</button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent className="bg-white shadow-md rounded-md p-2">
-					<DropdownMenuItem onClick={upload} className="flex items-center p-2 rounded-md hover:bg-s2/20 cursor-pointer hover:border-none">
+					<DropdownMenuItem onClick={upload} className="flex items-center p-2 rounded-md hover:bg-s2/20 cursor-pointer hover:border-none hover:outline-none">
 						<UploadIcon className="size-4 mr-2" />
 						Upload
 					</DropdownMenuItem>
-					<DropdownMenuItem onClick={() => setOpenDialog(true)} className="flex items-center p-2 rounded-md hover:bg-s2/20 cursor-pointer hover:border-none">
+					<DropdownMenuItem onClick={() => setOpenDialog(true)} className="flex items-center p-2 rounded-md hover:bg-s2/20 cursor-pointer hover:border-none hover:outline-none">
 						<SearchIcon className="size-4 mr-2" />
 						Paste URL of image...
 					</DropdownMenuItem>
