@@ -10,6 +10,7 @@ import { ColorButton, HighlightButton } from "./toolbar-buttons/color-button";
 import { LinkButton } from "./toolbar-buttons/link-button";
 import { ImageButton } from "./toolbar-buttons/image-button";
 import { AlignmentButtons } from "./toolbar-buttons/alignment-buttons";
+import { FontSizeTool } from "./toolbar-buttons/font-size-tool";
 
 interface ToolbarProps {
 	tools: {
@@ -34,6 +35,8 @@ const Toolbar = () => {
 				<TextStylesDropdown />
 				<Separator orientation="vertical" className="h-6 bg-neutral-300" />
 				<FontFamilyDropdown />
+				<Separator orientation="vertical" className="h-6 bg-neutral-300" />
+				<FontSizeTool />
 				<Separator orientation="vertical" className="h-6 bg-neutral-300" />
 				{tools[1].map((tool) => (
 					<ToolbarButton key={tool.name} {...tool} />

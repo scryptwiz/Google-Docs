@@ -1,7 +1,7 @@
 "use client";
 
 import { EditorStore } from "@/hooks/editor-store";
-import { Bold, Code, Italic, LayoutList, List, MessageSquarePlus, PaintRoller, Printer, Redo2, RemoveFormatting, Search, SpellCheck, Underline, Undo2 } from "lucide-react";
+import { Bold, Code, Italic, List, ListOrdered, ListTodo, MessageSquarePlus, PaintRoller, Printer, Redo2, RemoveFormatting, Search, SpellCheck, Underline, Undo2 } from "lucide-react";
 
 const ToolData = () => {
 	const { editor } = EditorStore();
@@ -84,9 +84,21 @@ const ToolData = () => {
 		[
 			{
 				name: "Task List",
-				icon: LayoutList,
+				icon: ListTodo,
 				onClick: () => editor?.chain().focus().toggleTaskList().run(),
 				active: editor?.isActive('taskList'),
+			},
+			{
+				name: "Bullet List",
+				icon: List,
+				onClick: () => editor?.chain().focus().toggleBulletList().run(),
+				active: editor?.isActive('bulletList'),
+			},
+			{
+				name: "Ordered List",
+				icon: ListOrdered,
+				onClick: () => editor?.chain().focus().toggleOrderedList().run(),
+				active: editor?.isActive('orderedList'),
 			}
 		]
 	];

@@ -26,6 +26,7 @@ import js from 'highlight.js/lib/languages/javascript'
 import ts from 'highlight.js/lib/languages/typescript'
 import html from 'highlight.js/lib/languages/xml'
 import { EditorStore } from '@/hooks/editor-store'
+import { FontSizeExtension } from '@/extensions/font-size'
 
 const Editor = () => {
   const { setEditor } = EditorStore();
@@ -66,13 +67,14 @@ const Editor = () => {
       FontFamily,
       TextStyle,
       Color,
-      TextAlign.configure({
-        types: ['heading', 'paragraph'],
-      }),
+      FontSizeExtension,
       Highlight.configure({ multicolor: true }),
       TaskItem.configure({ nested: true }),
       CodeBlockLowlight.configure({ lowlight }),
       Table.configure({ resizable: true }),
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
+      }),
       Link.configure({
         openOnClick: false,
         autolink: true,
