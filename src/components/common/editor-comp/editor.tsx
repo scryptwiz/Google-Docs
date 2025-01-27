@@ -18,6 +18,8 @@ import { Color } from '@tiptap/extension-color'
 import Highlight from '@tiptap/extension-highlight'
 import Link from '@tiptap/extension-link'
 import TextAlign from '@tiptap/extension-text-align'
+import { FontSizeExtension } from '@/extensions/font-size'
+import { LineHeightExtension } from '@/extensions/line-height'
 
 // load all languages with "all" or common languages with "common"
 import { all, createLowlight } from 'lowlight'
@@ -26,7 +28,6 @@ import js from 'highlight.js/lib/languages/javascript'
 import ts from 'highlight.js/lib/languages/typescript'
 import html from 'highlight.js/lib/languages/xml'
 import { EditorStore } from '@/hooks/editor-store'
-import { FontSizeExtension } from '@/extensions/font-size'
 
 const Editor = () => {
   const { setEditor } = EditorStore();
@@ -68,6 +69,10 @@ const Editor = () => {
       TextStyle,
       Color,
       FontSizeExtension,
+      LineHeightExtension.configure({
+        types: ['paragraph', 'heading'],
+        defaultLineHeight: '1.15',
+      }),
       Highlight.configure({ multicolor: true }),
       TaskItem.configure({ nested: true }),
       CodeBlockLowlight.configure({ lowlight }),
