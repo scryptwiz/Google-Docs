@@ -28,6 +28,7 @@ import js from 'highlight.js/lib/languages/javascript'
 import ts from 'highlight.js/lib/languages/typescript'
 import html from 'highlight.js/lib/languages/xml'
 import { EditorStore } from '@/hooks/editor-store'
+import { Ruler } from './ruler'
 
 const Editor = () => {
   const { setEditor } = EditorStore();
@@ -43,6 +44,7 @@ const Editor = () => {
   lowlight.register('ts', ts)
 
   const editor = useEditor({
+    immediatelyRender: false,
     onCreate ({ editor }) { setEditor(editor); },
     onDestroy () { setEditor(null) },
     onTransaction ({ editor }) { setEditor(editor) },
@@ -174,6 +176,7 @@ const Editor = () => {
 
   return (
     <div className="size-full overflow-x-auto bg-s3 px-4 print:p-0 print:bg-white print:overflow-x-visible">
+      <Ruler />
       <div className="min-w-max flex justify-center w-[816px] print:py-0 py-4 mx-auto print:w-full print:min-w-0">
         <EditorContent editor={editor} />
       </div>
