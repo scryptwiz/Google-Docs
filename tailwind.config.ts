@@ -16,6 +16,7 @@ export default {
                 s4: "#f0f4f9",
                 s5: "#fafbfd",
                 p1: "#0b57d0",
+                p2: "#4285f4",
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
                 card: {
