@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarSub, MenubarSubTrigger, MenubarSubContent } from "@/components/ui/menubar";
-import { Clipboard, CloudUpload, Copy, Download, FileText, Folder, Monitor, Redo2, Scissors, Undo2, ZoomIn, ZoomOut } from "lucide-react";
+import { Bold, Clipboard, CloudUpload, Copy, Download, FileText, Folder, Italic, Monitor, Redo2, RemoveFormatting, Scissors, StrikethroughIcon, Underline, Undo2, ZoomIn, ZoomOut } from "lucide-react";
 import { EditorStore } from "@/hooks/editor-store";
 
 const DocMenuBar = () => {
@@ -86,7 +86,20 @@ const DocMenuBar = () => {
 			],
 		},
 		{ id: "docs-insert-menu", label: "Insert" },
-		{ id: "docs-format-menu", label: "Format" },
+		{
+			id: "docs-format-menu", label: "Format", items: [
+				{
+					name: "Text",
+					submenu: [
+						{ name: "Bold", icon: Bold, action: () => editor?.chain().focus().toggleBold().run() },
+						{ name: "Italic", icon: Italic, action: () => editor?.chain().focus().toggleItalic().run() },
+						{ name: "Underline", icon: Underline, action: () => editor?.chain().focus().toggleUnderline().run() },
+						{ name: "Strikethrough", icon: StrikethroughIcon, action: () => editor?.chain().focus().toggleStrike().run() },
+					],
+				},
+				{ name: "Clear Formatting", icon: RemoveFormatting, action: () => editor?.chain().focus().unsetAllMarks().run() },
+			]
+		},
 		{ id: "docs-tools-menu", label: "Tools" },
 		{ id: "docs-extensions-menu", label: "Extensions" },
 		{ id: "docs-help-menu", label: "Help" },
@@ -113,7 +126,7 @@ const DocMenuBar = () => {
 										<MenubarSubContent>
 											{item.submenu.map((subItem, subIndex) => (
 												<MenubarItem key={subIndex} onSelect={subItem.action} className="flex items-center gap-2">
-													{/* {subItem.icon && <subItem.icon size={14} />} */}
+													{subItem.icon && <subItem.icon size={14} />}
 													<span>{subItem.name}</span>
 												</MenubarItem>
 											))}
