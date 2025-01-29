@@ -126,7 +126,7 @@ const DocMenuBar = () => {
 										<MenubarSubContent>
 											{item.submenu.map((subItem, subIndex) => (
 												<MenubarItem key={subIndex} onSelect={subItem.action} className="flex items-center gap-2">
-													{subItem.icon && <subItem.icon size={14} />}
+													{"icon" in subItem && <subItem.icon size={14} />}
 													<span>{subItem.name}</span>
 												</MenubarItem>
 											))}
