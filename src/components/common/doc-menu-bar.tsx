@@ -1,8 +1,11 @@
 "use client";
-import React from "react";
+
+import { jsPDF } from "jspdf";
 import { Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarSub, MenubarSubTrigger, MenubarSubContent } from "@/components/ui/menubar";
-import { Bold, Clipboard, CloudUpload, Copy, Download, FileText, Folder, Italic, Monitor, Redo2, RemoveFormatting, Scissors, StrikethroughIcon, Underline, Undo2, ZoomIn, ZoomOut } from "lucide-react";
+import { Bold, Clipboard, CloudUpload, Copy, Download, FileText, Folder, Italic, Monitor, Redo2, RemoveFormatting, Scissors, StrikethroughIcon, Table, Underline, Undo2, ZoomIn, ZoomOut } from "lucide-react";
 import { EditorStore } from "@/hooks/editor-store";
+import { Document, Packer, Paragraph, TextRun } from "docx";
+import html2canvas from "html2canvas";
 
 const DocMenuBar = () => {
 	const { editor } = EditorStore();
@@ -25,6 +28,64 @@ const DocMenuBar = () => {
 		}
 	};
 
+	const insertTable = (rows: number, cols: number) => {
+		editor?.chain().focus().insertTable({ rows, cols, withHeaderRow: true }).run();
+	}
+
+	const onDownload = (blob: Blob, filename: string) => {
+		const url = URL.createObjectURL(blob);
+		const a = document.createElement("a");
+		a.href = url;
+		a.download = filename;
+		a.click();
+	}
+
+	const exportAsDOCX = async () => {
+		if (!editor) return;
+
+		const text = editor.getText();
+		const doc = new Document({
+			sections: [
+				{
+					properties: {},
+					children: [new Paragraph({ children: [new TextRun(text)] })],
+				},
+			],
+		});
+
+		const blob = await Packer.toBlob(doc);
+		onDownload(blob, "document.docx");
+	};
+
+	const exportAsTXT = async () => {
+		if (!editor) return;
+
+		const text = editor.getText();
+		const blob = new Blob([text], { type: "text/plain" });
+		onDownload(blob, "document.txt");
+	};
+
+	const exportAsPDF = async () => {
+		if (!editor) return;
+
+		const node = document.querySelector(".ProseMirror") as HTMLElement;
+		const canvas = await html2canvas(node, { scale: 2 });
+		const imgData = canvas.toDataURL("image/png");
+		const pdf = new jsPDF("p", "mm", "a4");
+
+		const pdfWidth = pdf.internal.pageSize.getWidth();
+		const pdfHeight = pdf.internal.pageSize.getHeight();
+
+		// Scale the image to fit full width
+		const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+
+		// Add the image to fill the entire page width
+		pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, imgHeight);
+
+		// Use your custom onDownload function
+		onDownload(pdf.output("blob"), "document.pdf");
+	};
+
 	const menus = [
 		{
 			id: "docs-file-menu",
@@ -37,9 +98,9 @@ const DocMenuBar = () => {
 					name: "Export",
 					icon: Download,
 					submenu: [
-						{ name: "Export as PDF", action: () => console.log("Exporting as PDF") },
-						{ name: "Export as DOCX", action: () => console.log("Exporting as DOCX") },
-						{ name: "Export as TXT", action: () => console.log("Exporting as TXT") },
+						{ name: "Export as PDF", action: () => { exportAsPDF() } },
+						{ name: "Export as DOCX", action: () => { exportAsDOCX() } },
+						{ name: "Export as TXT", action: () => { exportAsTXT() } },
 					],
 				},
 			],
@@ -50,16 +111,8 @@ const DocMenuBar = () => {
 			items: [
 				{ name: "Undo", icon: Undo2, action: () => editor?.chain().focus().undo().run() },
 				{ name: "Redo", icon: Redo2, action: () => editor?.chain().focus().redo().run() },
-				{
-					name: "Cut",
-					icon: Scissors,
-					action: () => handleClipboardAction("cut", editor),
-				},
-				{
-					name: "Copy",
-					icon: Copy,
-					action: () => handleClipboardAction("copy", editor),
-				},
+				{ name: "Cut", icon: Scissors, action: () => handleClipboardAction("cut", editor) },
+				{ name: "Copy", icon: Copy, action: () => handleClipboardAction("copy", editor) },
 				{
 					name: "Paste",
 					icon: Clipboard,
@@ -85,7 +138,22 @@ const DocMenuBar = () => {
 				{ name: "Full Screen", icon: Monitor, action: () => console.log("Full Screen clicked") },
 			],
 		},
-		{ id: "docs-insert-menu", label: "Insert" },
+		{
+			id: "docs-insert-menu", label: "Insert", items: [
+				{
+					name: "Table",
+					icon: Table,
+					submenu: [
+						{ name: "1x1", action: () => insertTable(1, 1) },
+						{ name: "2x2", action: () => insertTable(2, 2) },
+						{ name: "3x3", action: () => insertTable(3, 3) },
+						{ name: "4x4", action: () => insertTable(4, 4) },
+					],
+				},
+				{ name: "Merge Cells", action: () => editor?.chain().focus().mergeCells().run() },
+				{ name: "Split Cell", action: () => editor?.chain().focus().splitCell().run() },
+			]
+		},
 		{
 			id: "docs-format-menu", label: "Format", items: [
 				{
