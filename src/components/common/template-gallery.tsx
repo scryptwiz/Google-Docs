@@ -6,9 +6,15 @@ import { Carousel, CarouselContent, CarouselItem } from "../ui/carousel";
 import { templates } from "@/constants/templates";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
+import { useTemplateStore } from "@/hooks/useTemplateStore";
 
 export const TemplateGallery = () => {
 	const router = useRouter();
+	const { hideTemplates, toggleTemplates } = useTemplateStore();
+
+	const displayedTemplates = hideTemplates
+		? templates.filter((template) => template.id === "blank")
+		: templates;
 
 	return (
 		<div className="bg-s6">
@@ -21,16 +27,16 @@ export const TemplateGallery = () => {
 								<EllipsisVertical size={24} strokeWidth={2} className="text-s1" />
 							</button>
 						</DropdownMenuTrigger>
-						<DropdownMenuContent className="w-32" align="end">
-							<DropdownMenuItem onSelect={() => console.log('Hide Template')}>
-								Hide Template
+						<DropdownMenuContent className="w-36" align="end">
+							<DropdownMenuItem onSelect={toggleTemplates}>
+								{hideTemplates ? "Show Templates" : "Hide Templates"}
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
 				</div>
 				<Carousel>
 					<CarouselContent className="-ml-4">
-						{templates.map((template) => (
+						{displayedTemplates.map((template) => (
 							<CarouselItem
 								key={template.id}
 								className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 2xl:basis-[14.285714%] pl-4"
