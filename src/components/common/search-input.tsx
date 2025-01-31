@@ -7,9 +7,7 @@ interface SearchInputProps {
 	placeholder?: string;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({
-	placeholder = "Search",
-}) => {
+const SearchInput: React.FC<SearchInputProps> = ({ placeholder = "Search" }) => {
 	const [searchQuery, setSearchQuery] = useState("");
 
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,7 +35,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 
 			{/* Clear Button */}
 			{searchQuery && (
-				<X className="absolute right-2 text-gray-400"
+				<X className="absolute right-2 text-gray-400 cursor-pointer"
 					aria-label="Clear search"
 					onClick={clearSearch} />
 			)}
