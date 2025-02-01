@@ -1,14 +1,15 @@
 "use client";
 
+import { useSearchStore } from "@/hooks/useSearchStore";
 import { Search, X } from "lucide-react";
-import React, { useState } from "react";
+import React from "react";
 
 interface SearchInputProps {
 	placeholder?: string;
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({ placeholder = "Search" }) => {
-	const [searchQuery, setSearchQuery] = useState("");
+	const { searchQuery, setSearchQuery } = useSearchStore();
 
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;

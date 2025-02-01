@@ -7,18 +7,34 @@ import { templates } from "@/constants/templates";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 import { useTemplateStore } from "@/hooks/useTemplateStore";
+import { useMutation } from "convex/react";
+import { api } from "../../../convex/_generated/api";
+import { useState } from "react";
 
 export const TemplateGallery = () => {
 	const router = useRouter();
 	const { hideTemplates, toggleTemplates } = useTemplateStore();
+	const create = useMutation(api.documents.createDocument);
+	const [creatingDoc, setCreatingDoc] = useState(false);
 
 	const displayedTemplates = hideTemplates
 		? templates.filter((template) => template.id === "blank")
 		: templates;
 
+	const createDoc = (title: string, initialContent: string) => {
+		setCreatingDoc(true);
+		create({ title, initialContent })
+			.then((doc_id) => {
+				router.push(`/docs/${doc_id}`);
+			})
+			.finally(() => {
+				setCreatingDoc(false);
+			});
+	}
+
 	return (
 		<div className="bg-s6">
-			<div className="max-w-screen-lg mx-auto px-16 py-6 flex flex-col gap-y-4">
+			<div className="max-w-screen-lg mx-auto md:px-16 px-5 py-6 flex flex-col gap-y-4">
 				<div className="flex items-center justify-between w-full">
 					<h3 className="text-s1">Start a new document</h3>
 					<DropdownMenu>
@@ -44,12 +60,12 @@ export const TemplateGallery = () => {
 								<div
 									className={cn(
 										"aspect-[3/4] flex flex-col gap-y-2.5",
-										// isCreating && "pointer-events-none opacity-50"
+										creatingDoc && "pointer-events-none opacity-50"
 									)}
 								>
 									<button
-										// disabled={isCreating}
-										onClick={() => { router.push(`/docs/${template.id}`) }}
+										disabled={creatingDoc}
+										onClick={() => createDoc(template.label, "")}
 										style={{
 											backgroundImage: `url(${template.imageUrl})`,
 											backgroundSize: "cover",
