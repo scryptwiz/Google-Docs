@@ -1,0 +1,1 @@
+export const logo = "/docs_logo.png";
