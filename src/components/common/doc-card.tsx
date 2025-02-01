@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { logo } from "@/constants/images";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DocMenu } from "./doc-menu";
 
 interface Props {
 	document: Doc<"documents">;
@@ -45,18 +46,7 @@ export const DocCard = ({ document }: Props) => {
 
 				{/* More Options */}
 				<div className="flex justify-end px-4 pb-3">
-					<DropdownMenu>
-						<DropdownMenuTrigger asChild>
-							<button className="border-none px-2 py-2 transition rounded-full hover:bg-gray-200">
-								<EllipsisVertical size={20} />
-							</button>
-						</DropdownMenuTrigger>
-						<DropdownMenuContent align="end">
-							<DropdownMenuItem onSelect={() => onNewTabClick(document._id)}>
-								Open in a new tab
-							</DropdownMenuItem>
-						</DropdownMenuContent>
-					</DropdownMenu>
+					<DocMenu documentId={document._id} title={document.title} onNewTabClick={onNewTabClick} />
 				</div>
 			</div>
 		</div>
