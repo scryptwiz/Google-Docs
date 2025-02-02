@@ -13,7 +13,7 @@ const DocsPage = () => {
 
 	const { results, status, loadMore } = usePaginatedQuery(
 		api.documents.getDocuments,
-		{ search: searchQuery },
+		{ search: searchQuery || "" },
 		{ initialNumItems: 10 }
 	);
 
