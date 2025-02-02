@@ -36,24 +36,44 @@ export const getDocuments = query({
 	handler: async (ctx, { search, paginationOpts }) => {
 		const user = await getUser(ctx);
 		const organizationId = getOrganizationId(user);
-		const query = ctx.db.query("documents");
 
-		if (search) {
-			const searchQuery = query.withSearchIndex("search_title", (q) =>
-				q.search("title", search)
-			);
-			return organizationId
-				? searchQuery.filter(q => q.eq("organizationId", organizationId)).paginate(paginationOpts)
-				: searchQuery.filter(q => q.eq("ownerId", user.subject)).paginate(paginationOpts);
+		if (search && organizationId) {
+			return await ctx.db
+				.query("documents")
+				.withSearchIndex("search_title", (q) =>
+					q.search("title", search).eq("organizationId", organizationId)
+				)
+				.paginate(paginationOpts);
 		}
 
-		const indexQuery = organizationId
-			? query.withIndex("by_organizationId", (q) => q.eq("organizationId", organizationId))
-			: query.withIndex("by_ownerId", (q) => q.eq("ownerId", user.subject));
+		if (search) {
+			return await ctx.db
+				.query("documents")
+				.withSearchIndex("search_title", (q) =>
+					q.search("title", search).eq("ownerId", user.subject)
+				)
+				.paginate(paginationOpts);
+		}
 
-		return indexQuery.paginate(paginationOpts);
+		if (organizationId) {
+			return await ctx.db
+				.query("documents")
+				.withIndex("by_organizationId", (q) =>
+					q.eq("organizationId", organizationId)
+				)
+				.order("desc") // 🔥 Sort by latest first
+				.paginate(paginationOpts);
+		}
+
+		return await ctx.db
+			.query("documents")
+			.withIndex("by_ownerId", (q) => q.eq("ownerId", user.subject))
+			.order("desc")
+			.paginate(paginationOpts);
 	},
 });
+
+
 
 const checkDocumentAccess = async (ctx: any, user: User, documentId: string) => {
 	const document = await ctx.db.get(documentId);

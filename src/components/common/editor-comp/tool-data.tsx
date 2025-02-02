@@ -69,11 +69,6 @@ const ToolData = () => {
 		],
 		[
 			{
-				name: "Comment",
-				icon: MessageSquarePlus,
-				onClick: () => console.log("comment"),
-			},
-			{
 				name: "Code",
 				icon: Code,
 				disable: !editor?.can().chain().focus().toggleCode().run(),

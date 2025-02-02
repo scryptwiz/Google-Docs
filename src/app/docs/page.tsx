@@ -14,7 +14,7 @@ const DocsPage = () => {
 	const { results, status, loadMore } = usePaginatedQuery(
 		api.documents.getDocuments,
 		{ search: searchQuery },
-		{ initialNumItems: 5 }
+		{ initialNumItems: 10 }
 	);
 
 	if (results === undefined) {

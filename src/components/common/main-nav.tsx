@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link"
 
 import { DOCS_IMAGE } from "@/lib/constants";
-import { UserButton } from "@clerk/nextjs";
+import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import SearchInput from "./search-input";
 
 const MainNav = () => {
@@ -22,13 +22,16 @@ const MainNav = () => {
 
 				{/* User Button */}
 				<div className="justify-self-end flex items-center">
-					<UserButton
-						appearance={{
-							elements: {
-								avatarBox: "size-8",
-							},
-						}}
-					/>
+					<div className="flex items-center gap-2">
+						<OrganizationSwitcher />
+						<UserButton
+							appearance={{
+								elements: {
+									avatarBox: "size-8",
+								},
+							}}
+						/>
+					</div>
 				</div>
 			</div>
 		</nav>

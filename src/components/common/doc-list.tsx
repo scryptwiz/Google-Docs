@@ -12,7 +12,7 @@ interface Props {
 
 export const DocList = ({ documents, loadMore, status }: Props) => {
 	return (
-		<div className="max-w-screen-lg mx-auto px-16 py-6 flex flex-col gap-5">
+		<div className="max-w-screen-lg mx-auto md:px-16 px-5 py-6 flex flex-col gap-5">
 			{documents === undefined ? (
 				<div className="flex justify-center items-center h-24">
 					<LoaderIcon className="animate-spin text-muted-foreground size-5" />
@@ -22,7 +22,7 @@ export const DocList = ({ documents, loadMore, status }: Props) => {
 					No Document found
 				</div>
 			) : (
-				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-4">
+				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-5 py-4">
 					{documents.map((document) => (
 						<DocCard key={document._id} document={document} />
 					))}
