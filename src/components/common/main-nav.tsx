@@ -23,7 +23,12 @@ const MainNav = () => {
 				{/* User Button */}
 				<div className="justify-self-end flex items-center">
 					<div className="flex items-center gap-2">
-						<OrganizationSwitcher />
+						<OrganizationSwitcher
+							afterCreateOrganizationUrl="/"
+							afterSelectOrganizationUrl="/"
+							afterLeaveOrganizationUrl="/"
+							afterSelectPersonalUrl="/"
+						/>
 						<UserButton
 							appearance={{
 								elements: {
