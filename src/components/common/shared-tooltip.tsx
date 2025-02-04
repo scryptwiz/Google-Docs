@@ -6,7 +6,6 @@ type SharedTooltipProps = {
 }
 
 const SharedTooltip = ({ message = "Shared", children }: SharedTooltipProps) => {
-	console.log({ message })
 	return (
 		<TooltipProvider>
 			<Tooltip delayDuration={0}>

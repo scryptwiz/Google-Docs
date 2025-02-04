@@ -8,6 +8,7 @@ type docPageIDProps = {
 
 const page = async ({ params }: docPageIDProps) => {
     const { _id } = await params;
+    console.log(_id)
 
     return (
         <div className="min-h-screen bg-s5">
