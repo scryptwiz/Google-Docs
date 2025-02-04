@@ -65,7 +65,7 @@ export const TemplateGallery = () => {
 								>
 									<button
 										disabled={creatingDoc}
-										onClick={() => createDoc(template.label, "")}
+										onClick={() => createDoc(template.label, template.initialContent)}
 										style={{
 											backgroundImage: `url(${template.imageUrl})`,
 											backgroundSize: "cover",

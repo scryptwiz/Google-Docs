@@ -3,9 +3,9 @@
 import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogCancel, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { useMutation } from "convex/react";
 import { useState } from "react";
-import { toast } from "sonner";
 import { Id } from "../../../convex/_generated/dataModel";
 import { api } from "../../../convex/_generated/api";
+import { toast } from "sonner";
 
 interface Props {
 	documentId: Id<"documents">;
@@ -32,6 +32,7 @@ export const RemoveDialog = ({ documentId, children }: Props) => {
 						Cancel
 					</AlertDialogCancel>
 					<AlertDialogAction
+						className="bg-red-600 hover:bg-red-700 text-white font-medium px-4 py-2 rounded-md transition disabled:opacity-50 disabled:cursor-not-allowed"
 						disabled={isRemoving}
 						onClick={(e) => {
 							e.stopPropagation();

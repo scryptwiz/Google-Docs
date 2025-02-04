@@ -31,7 +31,7 @@ export const DocList = ({ documents, loadMore, status }: Props) => {
 
 			<div className="flex items-center justify-center">
 				<Button variant="ghost" size="sm" onClick={() => loadMore(5)} disabled={status !== "CanLoadMore"}>
-					{status === "CanLoadMore" ? "Load More" : "End of results"}
+					{status === "CanLoadMore" && "Load More"}
 				</Button>
 			</div>
 		</div>

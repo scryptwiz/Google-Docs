@@ -30,7 +30,11 @@ import html from 'highlight.js/lib/languages/xml'
 import { EditorStore } from '@/hooks/editor-store'
 import { Ruler } from './ruler'
 
-const Editor = () => {
+type EditorProps = {
+  initialContent?: string | undefined;
+}
+
+const Editor = ({ initialContent }: EditorProps) => {
   const { setEditor } = EditorStore();
 
   // create a lowlight instance with all languages loaded

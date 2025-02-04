@@ -2,11 +2,10 @@
 
 import React from "react";
 import { Doc } from "../../../convex/_generated/dataModel";
-import { Building2Icon, CircleUserIcon, EllipsisVertical } from "lucide-react";
+import { Users } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { logo } from "@/constants/images";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { doc_icon, logo } from "@/constants/images";
 import { DocMenu } from "./doc-menu";
 
 interface Props {
@@ -32,14 +31,13 @@ export const DocCard = ({ document }: Props) => {
 
 			<div className="flex items-center py-3 justify-between">
 				{/* Document Info */}
-				<div className="px-3 py-2 md:py-3">
+				<div className="px-3 py-2">
 					<span className="font-medium text-sm">{document.title}</span>
 					<div className="flex items-center gap-2 text-gray-500 text-xs mt-1">
-						{document.organizationId ? (
-							<Building2Icon className="size-4 inline-block" />
-						) : (
-							<CircleUserIcon className="size-4 inline-block" />
-						)}
+						<div className="flex items-center gap-2">
+							<Image src={doc_icon} alt="Doc Icon" width={16} height={16} />
+							{document.organizationId && <Users className="size-4 inline-block" />}
+						</div>
 						<p>{new Date(document._creationTime).toLocaleDateString()}</p>
 					</div>
 				</div>

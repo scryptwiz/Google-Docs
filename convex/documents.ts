@@ -35,6 +35,7 @@ export const getDocuments = query({
 	},
 	handler: async (ctx, { search, paginationOpts }) => {
 		const user = await getUser(ctx);
+		console.log("user", user)
 		const organizationId = getOrganizationId(user);
 
 		if (search && organizationId) {
