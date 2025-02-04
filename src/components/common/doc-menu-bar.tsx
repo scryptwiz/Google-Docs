@@ -7,12 +7,25 @@ import { EditorStore } from "@/hooks/editor-store";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 import html2canvas from "html2canvas";
 import { preloadedDocProps } from "@/constants/types";
-import { usePreloadedQuery } from "convex/react";
+import { useMutation, usePreloadedQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const DocMenuBar = ({ preloadedDoc }: preloadedDocProps) => {
+	const router = useRouter();
 	const docData = usePreloadedQuery(preloadedDoc)
+	const create = useMutation(api.documents.createDocument);
 
 	const { editor } = EditorStore();
+
+	const createNewDoc = () => {
+		create({ title: "Untitled Document", initialContent: "" })
+			.catch(() => toast.error("Failed to create a new document. Please try again."))
+			.then((doc_id) => {
+				router.push(`/docs/${doc_id}`);
+			})
+	}
 
 	const handleClipboardAction = async (action: "cut" | "copy", editor: any) => {
 		if (!editor) return;
@@ -95,7 +108,7 @@ const DocMenuBar = ({ preloadedDoc }: preloadedDocProps) => {
 			id: "docs-file-menu",
 			label: "File",
 			items: [
-				{ name: "New", icon: FileText, action: () => console.log("New document created") },
+				{ name: "New", icon: FileText, action: () => createNewDoc() },
 				{ name: "Open", icon: Folder, action: () => console.log("Opening document") },
 				{ name: "Save", icon: CloudUpload, action: () => console.log("Saving document") },
 				{

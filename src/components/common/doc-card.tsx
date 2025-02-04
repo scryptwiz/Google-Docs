@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { doc_icon, logo } from "@/constants/images";
 import { DocMenu } from "./doc-menu";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import SharedTooltip from "./shared-tooltip";
 
 interface Props {

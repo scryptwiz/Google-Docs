@@ -10,6 +10,7 @@ import { useTemplateStore } from "@/hooks/useTemplateStore";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export const TemplateGallery = () => {
 	const router = useRouter();
@@ -24,6 +25,7 @@ export const TemplateGallery = () => {
 	const createDoc = (title: string, initialContent: string) => {
 		setCreatingDoc(true);
 		create({ title, initialContent })
+			.catch(() => toast.error("Failed to create a new document. Please try again."))
 			.then((doc_id) => {
 				router.push(`/docs/${doc_id}`);
 			})
