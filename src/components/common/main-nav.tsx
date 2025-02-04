@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link"
 
 import { DOCS_IMAGE } from "@/lib/constants";
-import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import SearchInput from "./search-input";
+import { OrganizationUserButton } from "./organization-user-button";
 
 const MainNav = () => {
 	return (
@@ -22,21 +22,7 @@ const MainNav = () => {
 
 				{/* User Button */}
 				<div className="justify-self-end flex items-center">
-					<div className="flex items-center gap-2">
-						<OrganizationSwitcher
-							afterCreateOrganizationUrl="/"
-							afterSelectOrganizationUrl="/"
-							afterLeaveOrganizationUrl="/"
-							afterSelectPersonalUrl="/"
-						/>
-						<UserButton
-							appearance={{
-								elements: {
-									avatarBox: "size-8",
-								},
-							}}
-						/>
-					</div>
+					<OrganizationUserButton />
 				</div>
 			</div>
 		</nav>

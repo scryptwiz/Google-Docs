@@ -6,6 +6,7 @@ import { DOCS_IMAGE } from "@/lib/constants";
 import DocNameInput from "@/components/common/doc-name-input";
 import DocMenuBar from "@/components/common/doc-menu-bar";
 import { UserButton } from "@clerk/nextjs";
+import { OrganizationUserButton } from "../organization-user-button";
 
 const DocsNav = () => {
 	return (
@@ -20,13 +21,7 @@ const DocsNav = () => {
 						<DocMenuBar />
 					</div>
 				</div>
-				<UserButton
-					appearance={{
-						elements: {
-							avatarBox: "size-8"
-						}
-					}}
-				/>
+				<OrganizationUserButton />
 			</div>
 		</nav>
 	)
