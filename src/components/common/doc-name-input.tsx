@@ -1,14 +1,20 @@
 "use client"
 
+import { preloadedDocProps } from '@/constants/types'
 import { docStore } from '@/hooks/store'
+import { usePreloadedQuery } from 'convex/react'
 import { CloudUpload, Star } from 'lucide-react'
 import React, { useRef } from 'react'
 
-type Props = {}
-
-export default function DocNameInput ({ }: Props) {
+export default function DocNameInput ({ preloadedDoc }: preloadedDocProps) {
 	const { docName, setDocName } = docStore()
 	const spanRef = useRef<HTMLSpanElement>(null)
+
+	const document = usePreloadedQuery(preloadedDoc)
+
+	React.useEffect(() => {
+		if (document?.title) setDocName(document.title);
+	}, [document?.title]);
 
 	const handleEnterPress = (event: React.KeyboardEvent<HTMLSpanElement>) => {
 		if (event.key === 'Enter') {

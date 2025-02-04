@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link"
 
-import { DOCS_IMAGE } from "@/lib/constants";
 import SearchInput from "./search-input";
 import { OrganizationUserButton } from "./organization-user-button";
+import { DOCS_IMAGE } from "@/constants/images";
 
 const MainNav = () => {
 	return (

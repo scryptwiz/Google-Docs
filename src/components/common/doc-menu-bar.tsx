@@ -6,8 +6,12 @@ import { Bold, Clipboard, CloudUpload, Copy, Download, FileText, Folder, Italic,
 import { EditorStore } from "@/hooks/editor-store";
 import { Document, Packer, Paragraph, TextRun } from "docx";
 import html2canvas from "html2canvas";
+import { preloadedDocProps } from "@/constants/types";
+import { usePreloadedQuery } from "convex/react";
 
-const DocMenuBar = () => {
+const DocMenuBar = ({ preloadedDoc }: preloadedDocProps) => {
+	const docData = usePreloadedQuery(preloadedDoc)
+
 	const { editor } = EditorStore();
 
 	const handleClipboardAction = async (action: "cut" | "copy", editor: any) => {
@@ -54,7 +58,7 @@ const DocMenuBar = () => {
 		});
 
 		const blob = await Packer.toBlob(doc);
-		onDownload(blob, "document.docx");
+		onDownload(blob, `${docData?.title}.docx`);
 	};
 
 	const exportAsTXT = async () => {
@@ -62,7 +66,7 @@ const DocMenuBar = () => {
 
 		const text = editor.getText();
 		const blob = new Blob([text], { type: "text/plain" });
-		onDownload(blob, "document.txt");
+		onDownload(blob, `${docData?.title}.txt`);
 	};
 
 	const exportAsPDF = async () => {
@@ -83,7 +87,7 @@ const DocMenuBar = () => {
 		pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, imgHeight);
 
 		// Use your custom onDownload function
-		onDownload(pdf.output("blob"), "document.pdf");
+		onDownload(pdf.output("blob"), `${docData?.title}.pdf`);
 	};
 
 	const menus = [

@@ -1,1 +1,0 @@
-export const DOCS_IMAGE = '/docs_logo.png';

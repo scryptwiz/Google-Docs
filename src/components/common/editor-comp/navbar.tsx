@@ -1,14 +1,14 @@
 import Image from "next/image";
 import Link from "next/link"
 
-import { DOCS_IMAGE } from "@/lib/constants";
 
 import DocNameInput from "@/components/common/doc-name-input";
 import DocMenuBar from "@/components/common/doc-menu-bar";
-import { UserButton } from "@clerk/nextjs";
 import { OrganizationUserButton } from "../organization-user-button";
+import { DOCS_IMAGE } from "@/constants/images";
+import { preloadedDocProps } from "@/constants/types";
 
-const DocsNav = () => {
+const DocsNav = ({ preloadedDoc }: preloadedDocProps) => {
 	return (
 		<nav className="px-5 py-4 bg-white print:hidden">
 			<div className="flex justify-between items-center">
@@ -17,8 +17,8 @@ const DocsNav = () => {
 						<Image src={DOCS_IMAGE} width={42} height={42} alt="" />
 					</Link>
 					<div className="flex flex-col">
-						<DocNameInput />
-						<DocMenuBar />
+						<DocNameInput preloadedDoc={preloadedDoc} />
+						<DocMenuBar preloadedDoc={preloadedDoc} />
 					</div>
 				</div>
 				<OrganizationUserButton />
