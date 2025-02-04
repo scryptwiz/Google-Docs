@@ -25,8 +25,8 @@ export const RenameDialog = ({ documentId, children, initialTitle }: Props) => {
 		e.preventDefault();
 		setIsUpdating(true);
 		update({ id: documentId, title: title.trim() || "Untitled" })
-			.catch(() => toast.error("Failed to remove document"))
-			.then(() => toast.success("Document deleted successfully"))
+			.catch(() => toast.error("Failed to rename document"))
+			.then(() => toast.success("Document renamed successfully"))
 			.then(() => {
 				setOpen(false);
 			})
