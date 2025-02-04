@@ -29,13 +29,12 @@ import ts from 'highlight.js/lib/languages/typescript'
 import html from 'highlight.js/lib/languages/xml'
 import { EditorStore } from '@/hooks/editor-store'
 import { Ruler } from './ruler'
+import { preloadedDocProps } from '@/constants/types'
+import { usePreloadedQuery } from 'convex/react'
 
-type EditorProps = {
-  initialContent?: string | undefined;
-}
-
-const Editor = ({ initialContent }: EditorProps) => {
+const Editor = ({ preloadedDoc }: preloadedDocProps) => {
   const { setEditor } = EditorStore();
+  const docData = usePreloadedQuery(preloadedDoc)
 
   // create a lowlight instance with all languages loaded
   const lowlight = createLowlight(all)
@@ -146,36 +145,37 @@ const Editor = ({ initialContent }: EditorProps) => {
         },
       }),
     ],
-    content: `
-            <h1>Hello World! 🌎️</h1>
-            <blockquote>Nothing is impossible, the word itself says “I’m possible!” </blockquote>
-            <pre><code class="language-javascript">for (var i=1; i <= 20; i++) {
-  if (i % 15 == 0)
-    console.log("FizzBuzz");
-  else if (i % 3 == 0)
-    console.log("Fizz");
-  else if (i % 5 == 0)
-    console.log("Buzz");
-  else
-    console.log(i);
-}</code>
-            </pre>
-            <p>Press Command/Ctrl + Enter to leave the fenced code block and continue typing in boring paragraphs.</p>
-            <table>
-          <tbody>
-            <tr>
-              <th>Name</th>
-              <th colspan="3">Description</th>
-            </tr>
-            <tr>
-              <td>Cyndi Lauper</td>
-              <td>Singer</td>
-              <td>Songwriter</td>
-              <td>Actress</td>
-            </tr>
-          </tbody>
-        </table>
-        `,
+    content: docData?.initialContent,
+    //     content: `
+    //             <h1>Hello World! 🌎️</h1>
+    //             <blockquote>Nothing is impossible, the word itself says “I’m possible!” </blockquote>
+    //             <pre><code class="language-javascript">for (var i=1; i <= 20; i++) {
+    //   if (i % 15 == 0)
+    //     console.log("FizzBuzz");
+    //   else if (i % 3 == 0)
+    //     console.log("Fizz");
+    //   else if (i % 5 == 0)
+    //     console.log("Buzz");
+    //   else
+    //     console.log(i);
+    // }</code>
+    //             </pre>
+    //             <p>Press Command/Ctrl + Enter to leave the fenced code block and continue typing in boring paragraphs.</p>
+    //             <table>
+    //           <tbody>
+    //             <tr>
+    //               <th>Name</th>
+    //               <th colspan="3">Description</th>
+    //             </tr>
+    //             <tr>
+    //               <td>Cyndi Lauper</td>
+    //               <td>Singer</td>
+    //               <td>Songwriter</td>
+    //               <td>Actress</td>
+    //             </tr>
+    //           </tbody>
+    //         </table>
+    //         `,
   })
 
   return (

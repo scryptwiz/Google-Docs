@@ -29,7 +29,7 @@ const page = async ({ params }: docPageIDProps) => {
         <div className="min-h-screen bg-s5">
             <DocsNav preloadedDoc={preloadedDoc} />
             <Toolbar />
-            <Editor />
+            <Editor preloadedDoc={preloadedDoc} />
         </div>
     )
 }
