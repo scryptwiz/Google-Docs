@@ -13,7 +13,7 @@ const SharedTooltip = ({ message = "Shared", children }: SharedTooltipProps) => 
 					{children}
 				</TooltipTrigger>
 				<TooltipContent side="bottom">
-					<p>{message}</p>
+					<p className='print:hidden'>{message}</p>
 				</TooltipContent>
 			</Tooltip>
 		</TooltipProvider>

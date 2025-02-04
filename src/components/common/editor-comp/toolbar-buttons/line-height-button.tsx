@@ -43,11 +43,11 @@ export const LineHeightButtons = () => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild >
-				<SharedTooltip message="Line Height" >
-					<button className="overflow-hidden min-w-7 shrink-0 flex items-center rounded-sm px-1.5 hover:bg-s1/15 text-xs h-7" >
+				<button className="overflow-hidden min-w-7 shrink-0 flex items-center rounded-sm px-1.5 hover:bg-s1/15 text-xs h-7" >
+					<SharedTooltip message="Line Height" >
 						<ListCollapseIcon className="size-4" />
-					</button>
-				</SharedTooltip>
+					</SharedTooltip>
+				</button>
 			</DropdownMenuTrigger >
 			<DropdownMenuContent className="px-1 py-2 flex flex-col" >
 				{

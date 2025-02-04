@@ -27,14 +27,16 @@ export const TextStylesDropdown = () => {
 	return (
 		<DropdownMenu open={open} onOpenChange={setOpen}>
 			<DropdownMenuTrigger asChild>
-				<SharedTooltip message="Text Styles">
-					<button className="overflow-hidden w-[120px] shrink-0 flex items-center rounded-sm px-1.5 hover:bg-s1/15 text-sm justify-between h-7">
-						<span className="truncate">
-							{getCurrentStyle()}
+				<button className="overflow-hidden w-[120px] shrink-0 flex items-center rounded-sm px-1.5 hover:bg-s1/15 text-sm justify-between h-7">
+					<SharedTooltip message="Text Styles">
+						<span className="flex items-center justify-between w-full">
+							<span className="truncate">
+								{getCurrentStyle()}
+							</span>
+							<ChevronDown className="ml-2 size-4 shrink-0" />
 						</span>
-						<ChevronDown className="ml-2 size-4 shrink-0" />
-					</button>
-				</SharedTooltip>
+					</SharedTooltip>
+				</button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="p-1 flex flex-col gap-y-1">
 				{styles.map(({ label, value, fontSize }) => (

@@ -37,16 +37,18 @@ export const AlignmentButtons = () => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<SharedTooltip message="Text Alignment">
-					<button className="overflow-hidden min-w-7 shrink-0 flex items-center rounded-sm px-1.5 hover:bg-s1/15 text-xs h-7">
-						<AlignLeft className="size-4" />
-						<ChevronDown className="size-3 shrink-0" />
-					</button>
-				</SharedTooltip>
+				<button className="overflow-hidden min-w-7 shrink-0 flex items-center rounded-sm px-1.5 hover:bg-s1/15 text-xs h-7">
+					<SharedTooltip message="Text Alignment">
+						<span className="overflow-hidden flex items-center text-xs">
+							<AlignLeft className="size-4" />
+							<ChevronDown className="size-3 shrink-0" />
+						</span>
+					</SharedTooltip>
+				</button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="p-1 justify-center flex">
 				{alignments.map((alignment) => (
-					<ToolbarButton key={alignment.title} icon={alignment.icon} active={alignment.active} onClick={() => editor?.chain().focus().setTextAlign(alignment.value).run()} />
+					<ToolbarButton key={alignment.title} name={alignment.title} icon={alignment.icon} active={alignment.active} onClick={() => editor?.chain().focus().setTextAlign(alignment.value).run()} />
 				))}
 			</DropdownMenuContent>
 		</DropdownMenu>

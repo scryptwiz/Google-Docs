@@ -74,11 +74,11 @@ export const ImageButton = () => {
 		<>
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
-					<SharedTooltip message="Insert Image">
-						<button className="overflow-hidden min-w-7 shrink-0 flex flex-col justify-center items-center rounded-sm px-1.5 hover:bg-s1/15 text-xs h-7 gap-1">
+					<button className="overflow-hidden min-w-7 shrink-0 flex flex-col justify-center items-center rounded-sm px-1.5 hover:bg-s1/15 text-xs h-7 gap-1">
+						<SharedTooltip message="Insert Image">
 							<Image className="size-4" />
-						</button>
-					</SharedTooltip>
+						</SharedTooltip>
+					</button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent className="bg-white shadow-md rounded-md p-2">
 					<DropdownMenuItem onClick={upload} className="flex items-center p-2 rounded-md hover:bg-s2/20 cursor-pointer hover:border-none hover:outline-none">
