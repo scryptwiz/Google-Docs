@@ -1,0 +1,24 @@
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip';
+
+type SharedTooltipProps = {
+	message?: string;
+	children: React.ReactNode;
+}
+
+const SharedTooltip = ({ message = "Shared", children }: SharedTooltipProps) => {
+	console.log({ message })
+	return (
+		<TooltipProvider>
+			<Tooltip delayDuration={0}>
+				<TooltipTrigger asChild>
+					{children}
+				</TooltipTrigger>
+				<TooltipContent side="bottom">
+					<p>{message}</p>
+				</TooltipContent>
+			</Tooltip>
+		</TooltipProvider>
+	);
+};
+
+export default SharedTooltip;

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { EditorStore } from "@/hooks/editor-store";
 import { Link2 } from "lucide-react";
 import { useState } from "react";
+import SharedTooltip from "../../shared-tooltip";
 
 export const LinkButton = () => {
 	const { editor } = EditorStore();
@@ -23,9 +24,11 @@ export const LinkButton = () => {
 	return (
 		<DropdownMenu onOpenChange={setOpen}>
 			<DropdownMenuTrigger asChild>
-				<button className="overflow-hidden min-w-7 shrink-0 flex flex-col justify-center items-center rounded-sm px-1.5 hover:bg-s1/15 text-xs h-7 gap-1">
-					<Link2 className="size-4" />
-				</button>
+				<SharedTooltip message="Insert Link">
+					<button className="overflow-hidden min-w-7 shrink-0 flex flex-col justify-center items-center rounded-sm px-1.5 hover:bg-s1/15 text-xs h-7 gap-1">
+						<Link2 className="size-4" />
+					</button>
+				</SharedTooltip>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="p-2.5 flex gap-2">
 				<Input type="text" placeholder="Insert Link" value={hrefValue} onChange={(e) => setHrefValue(e.target.value)} className='outline-none border focus:border-1 focus:border-p1 border-s1 hover:border-s2' />

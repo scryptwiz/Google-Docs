@@ -2,6 +2,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/compon
 import { EditorStore } from "@/hooks/editor-store";
 import { ListCollapseIcon } from "lucide-react";
 import { LineHeightButton } from "../toolbar-button";
+import SharedTooltip from "../../shared-tooltip";
 
 export const LineHeightButtons = () => {
 	const { editor } = EditorStore();
@@ -42,9 +43,11 @@ export const LineHeightButtons = () => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild >
-				<button className="overflow-hidden min-w-7 shrink-0 flex items-center rounded-sm px-1.5 hover:bg-s1/15 text-xs h-7" >
-					<ListCollapseIcon className="size-4" />
-				</button>
+				<SharedTooltip message="Line Height" >
+					<button className="overflow-hidden min-w-7 shrink-0 flex items-center rounded-sm px-1.5 hover:bg-s1/15 text-xs h-7" >
+						<ListCollapseIcon className="size-4" />
+					</button>
+				</SharedTooltip>
 			</DropdownMenuTrigger >
 			<DropdownMenuContent className="px-1 py-2 flex flex-col" >
 				{

@@ -6,6 +6,7 @@ import { Image, SearchIcon, UploadIcon, Loader2 } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import SharedTooltip from "../../shared-tooltip";
 
 export const ImageButton = () => {
 	const { editor } = EditorStore();
@@ -73,9 +74,11 @@ export const ImageButton = () => {
 		<>
 			<DropdownMenu>
 				<DropdownMenuTrigger asChild>
-					<button className="overflow-hidden min-w-7 shrink-0 flex flex-col justify-center items-center rounded-sm px-1.5 hover:bg-s1/15 text-xs h-7 gap-1">
-						<Image className="size-4" />
-					</button>
+					<SharedTooltip message="Insert Image">
+						<button className="overflow-hidden min-w-7 shrink-0 flex flex-col justify-center items-center rounded-sm px-1.5 hover:bg-s1/15 text-xs h-7 gap-1">
+							<Image className="size-4" />
+						</button>
+					</SharedTooltip>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent className="bg-white shadow-md rounded-md p-2">
 					<DropdownMenuItem onClick={upload} className="flex items-center p-2 rounded-md hover:bg-s2/20 cursor-pointer hover:border-none hover:outline-none">

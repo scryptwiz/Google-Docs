@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { doc_icon, logo } from "@/constants/images";
 import { DocMenu } from "./doc-menu";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import SharedTooltip from "./shared-tooltip";
 
 interface Props {
 	document: Doc<"documents">;
@@ -36,7 +38,9 @@ export const DocCard = ({ document }: Props) => {
 					<div className="flex items-center gap-2 text-gray-500 text-xs mt-1">
 						<div className="flex items-center gap-2">
 							<Image src={doc_icon} alt="Doc Icon" width={16} height={16} />
-							{document.organizationId && <Users className="size-4 inline-block" />}
+							{document.organizationId && (
+								<SharedTooltip message="shared"><Users className="size-4 inline-block" /></SharedTooltip>
+							)}
 						</div>
 						<p>{new Date(document._creationTime).toLocaleDateString()}</p>
 					</div>

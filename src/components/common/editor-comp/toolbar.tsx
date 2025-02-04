@@ -12,6 +12,7 @@ import { ImageButton } from "./toolbar-buttons/image-button";
 import { AlignmentButtons } from "./toolbar-buttons/alignment-buttons";
 import { FontSizeTool } from "./toolbar-buttons/font-size-tool";
 import { LineHeightButtons } from "./toolbar-buttons/line-height-button";
+import SharedTooltip from "../shared-tooltip";
 
 interface ToolbarProps {
 	tools: {

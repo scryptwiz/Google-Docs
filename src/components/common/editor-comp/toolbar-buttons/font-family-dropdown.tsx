@@ -3,6 +3,7 @@ import { EditorStore } from "@/hooks/editor-store";
 import { cn } from "@/lib/utils";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import SharedTooltip from "../../shared-tooltip";
 
 export const FontFamilyDropdown = () => {
 	const { editor } = EditorStore();
@@ -39,12 +40,14 @@ export const FontFamilyDropdown = () => {
 	return (
 		<DropdownMenu open={open} onOpenChange={setOpen}>
 			<DropdownMenuTrigger asChild>
-				<button className={cn("overflow-hidden w-[120px] shrink-0 flex items-center rounded-sm px-1.5 hover:bg-s1/15 text-sm justify-between h-7")}>
-					<span className="truncate">
-						{editor?.getAttributes("textStyle").fontFamily || "Arial"}
-					</span>
-					<ChevronDown className="ml-2 size-4 shrink-0" />
-				</button>
+				<SharedTooltip message="Font Family">
+					<button className={cn("overflow-hidden w-[120px] shrink-0 flex items-center rounded-sm px-1.5 hover:bg-s1/15 text-sm justify-between h-7")}>
+						<span className="truncate">
+							{editor?.getAttributes("textStyle").fontFamily || "Arial"}
+						</span>
+						<ChevronDown className="ml-2 size-4 shrink-0" />
+					</button>
+				</SharedTooltip>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="p-1 flex flex-col gap-y-1">
 				{fonts.map(({ label, value }) => (
