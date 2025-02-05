@@ -5,6 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 import { preloadQuery } from "convex/nextjs";
 import { api } from "../../../../convex/_generated/api";
 import { Id } from "../../../../convex/_generated/dataModel";
+import { Room } from "./room";
 
 type docPageIDProps = {
     params: Promise<{ _id: Id<"documents"> }>;
@@ -20,17 +21,19 @@ const page = async ({ params }: docPageIDProps) => {
     if (!token) throw new Error("Unauthorized")
 
     const preloadedDoc = await preloadQuery(
-        api.documents.getById,
+        api.documents.getDocById,
         { id: _id },
         { token },
     )
 
     return (
-        <div className="min-h-screen bg-s5">
-            <DocsNav preloadedDoc={preloadedDoc} />
-            <Toolbar />
-            <Editor preloadedDoc={preloadedDoc} />
-        </div>
+        <Room>
+            <div className="min-h-screen bg-s5">
+                <DocsNav preloadedDoc={preloadedDoc} />
+                <Toolbar />
+                <Editor preloadedDoc={preloadedDoc} />
+            </div>
+        </Room>
     )
 }
 

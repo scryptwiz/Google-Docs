@@ -1,6 +1,9 @@
+import "@liveblocks/react-ui/styles.css";
+import "@liveblocks/react-tiptap/styles.css";
+import "./globals.css";
+
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
-import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner";
 import { AlertTriangle, CheckCircle, Info, Loader2, XCircle } from "lucide-react";

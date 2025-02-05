@@ -23,8 +23,7 @@ export const RemoveDialog = ({ documentId, children }: Props) => {
 				<AlertDialogHeader>
 					<AlertDialogTitle>Are you sure?</AlertDialogTitle>
 					<AlertDialogDescription>
-						This action can not be undone. It will permanently delete your
-						document
+						This action can not be undone. It will permanently delete your document
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>

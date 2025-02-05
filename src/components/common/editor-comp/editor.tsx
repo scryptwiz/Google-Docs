@@ -31,9 +31,12 @@ import { EditorStore } from '@/hooks/editor-store'
 import { Ruler } from './ruler'
 import { preloadedDocProps } from '@/constants/types'
 import { usePreloadedQuery } from 'convex/react'
+import { useLiveblocksExtension, FloatingToolbar } from "@liveblocks/react-tiptap";
+import { Threads } from '@/app/docs/[_id]/threads'
 
 const Editor = ({ preloadedDoc }: preloadedDocProps) => {
   const { setEditor } = EditorStore();
+  const liveblocks = useLiveblocksExtension();
   const docData = usePreloadedQuery(preloadedDoc)
 
   // create a lowlight instance with all languages loaded
@@ -62,7 +65,10 @@ const Editor = ({ preloadedDoc }: preloadedDocProps) => {
       },
     },
     extensions: [
-      StarterKit,
+      liveblocks,
+      StarterKit.configure({
+        history: false
+      }),
       TaskList,
       TableRow,
       TableHeader,
@@ -183,6 +189,7 @@ const Editor = ({ preloadedDoc }: preloadedDocProps) => {
       <Ruler />
       <div className="min-w-max flex justify-center w-[816px] print:py-0 py-4 mx-auto print:w-full print:min-w-0">
         <EditorContent editor={editor} />
+        <Threads editor={editor} />
       </div>
     </div>
   )

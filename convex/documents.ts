@@ -35,7 +35,6 @@ export const getDocuments = query({
 	},
 	handler: async (ctx, { search, paginationOpts }) => {
 		const user = await getUser(ctx);
-		console.log("user", user)
 		const organizationId = getOrganizationId(user);
 
 		if (search && organizationId) {
@@ -74,7 +73,7 @@ export const getDocuments = query({
 	},
 });
 
-export const getById = query({
+export const getDocById = query({
 	args: { id: v.id("documents") },
 	handler: async (ctx, args) => {
 		const document = await ctx.db.get(args.id);
@@ -89,7 +88,7 @@ const checkDocumentAccess = async (ctx: any, user: User, documentId: string) => 
 
 	const organizationId = getOrganizationId(user);
 	const isOwner = document.ownerId === user.subject;
-	const isOrganizationMember = document.organizationId === organizationId;
+	const isOrganizationMember = !!(document.organizationId && document.organizationId === organizationId);
 
 	if (!isOwner && !isOrganizationMember) throw new ConvexError("Unauthorized");
 	return document;

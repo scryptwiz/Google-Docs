@@ -75,6 +75,12 @@ const ToolData = () => {
 				onClick: () => editor?.chain().focus().toggleCode().run(),
 				active: editor?.isActive('code'),
 			},
+			{
+				name: "Comment",
+				icon: MessageSquarePlus,
+				onClick: () => editor?.chain().focus().addPendingComment().run(),
+				active: editor?.isActive('liveblocksCommentMark')
+			}
 		],
 		[
 			{
