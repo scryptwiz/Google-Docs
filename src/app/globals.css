@@ -325,6 +325,9 @@ body {
 /* For mobile */
 .floating-threads {
   display: none;
+    @media print {
+      display: none !important;
+    }
 }
 
 /* For desktop */
@@ -334,18 +337,37 @@ body {
   width: 100%;
   position: absolute;
   right: 12px;
+  @media print {
+      display: none !important;
+    }
 }
 
 @media (max-width: 640px) {
   .floating-threads {
     display: block;
+    
+    @media print {
+      display: none !important;
+    }
   }
 
   .anchored-threads {
     display: none;
+    @media print {
+      display: none !important;
+    }
   }
 }
 
 div[data-radix-popper-content-wrapper] {
   z-index: 50!important;
+  @media print {
+      display: none !important;
+    }
+}
+
+.collaboration-cursor__caret {
+  @media print {
+      display: none !important;
+    }
 }

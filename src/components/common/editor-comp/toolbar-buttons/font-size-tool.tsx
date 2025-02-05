@@ -5,7 +5,8 @@ import { useState } from "react"
 export const FontSizeTool = () => {
 	const { editor } = EditorStore()
 
-	const currentFontSize = editor?.getAttributes("textStyle")?.fontSize ? editor?.getAttributes("textStyle")?.fontSize.replace("px", "") : "16"
+	const fontSizeAttr = editor?.getAttributes("textStyle")?.fontSize;
+	const currentFontSize = typeof fontSizeAttr === "string" ? fontSizeAttr.replace("px", "") : "16";
 	const [fontSize, setFontSize] = useState(currentFontSize)
 	const [inpValue, setInpValue] = useState(fontSize);
 	const [editing, setEditing] = useState(false);

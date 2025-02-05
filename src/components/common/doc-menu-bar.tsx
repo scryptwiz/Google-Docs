@@ -83,24 +83,25 @@ const DocMenuBar = ({ preloadedDoc }: preloadedDocProps) => {
 	};
 
 	const exportAsPDF = async () => {
-		if (!editor) return;
+		// if (!editor) return;
 
-		const node = document.querySelector(".ProseMirror") as HTMLElement;
-		const canvas = await html2canvas(node, { scale: 2 });
-		const imgData = canvas.toDataURL("image/png");
-		const pdf = new jsPDF("p", "mm", "a4");
+		// const node = document.querySelector(".ProseMirror") as HTMLElement;
+		// const canvas = await html2canvas(node, { scale: 2 });
+		// const imgData = canvas.toDataURL("image/png");
+		// const pdf = new jsPDF("p", "mm", "a4");
 
-		const pdfWidth = pdf.internal.pageSize.getWidth();
-		const pdfHeight = pdf.internal.pageSize.getHeight();
+		// const pdfWidth = pdf.internal.pageSize.getWidth();
+		// const pdfHeight = pdf.internal.pageSize.getHeight();
 
-		// Scale the image to fit full width
-		const imgHeight = (canvas.height * pdfWidth) / canvas.width;
+		// // Scale the image to fit full width
+		// const imgHeight = (canvas.height * pdfWidth) / canvas.width;
 
-		// Add the image to fill the entire page width
-		pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, imgHeight);
+		// // Add the image to fill the entire page width
+		// pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, imgHeight);
 
-		// Use your custom onDownload function
-		onDownload(pdf.output("blob"), `${docData?.title}.pdf`);
+		// // Use your custom onDownload function
+		// onDownload(pdf.output("blob"), `${docData?.title}.pdf`);
+		window.print();
 	};
 
 	const menus = [
