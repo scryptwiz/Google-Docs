@@ -2,10 +2,11 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { Liveblocks } from "@liveblocks/node";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "../../../../convex/_generated/api";
+import { CONVEX_URL, LIVEBLOCKS_SECRET_KEY } from "@/constants/config";
 
-const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!)
+const convex = new ConvexHttpClient(CONVEX_URL!)
 
-const liveblocks = new Liveblocks({ secret: `${process.env.NEXT_PUBLIC_LIVEBLOCKS_SECRET_KEY}` });
+const liveblocks = new Liveblocks({ secret: `${LIVEBLOCKS_SECRET_KEY}` });
 
 export async function POST (request: Request) {
 	// Get the current user from your database

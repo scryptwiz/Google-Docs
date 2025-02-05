@@ -7,6 +7,7 @@ import { Roboto } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner";
 import { AlertTriangle, CheckCircle, Info, Loader2, XCircle } from "lucide-react";
+import { CLERK_PUBLISHABLE_KEY } from "@/constants/config";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -23,7 +24,7 @@ console.log("Rendered on:", typeof window !== "undefined" ? "Client" : "Server")
 export default function RootLayout ({ children }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en">
-      <ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!}>
+      <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY}>
         <body className={`${roboto.variable} antialiased`}>
           {children}
           <Toaster

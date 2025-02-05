@@ -1,7 +1,9 @@
+import { CLERK_JWT_ISSUER_DOMAIN } from "@/constants/config";
+
 export default {
 	providers: [
 		{
-			domain: process.env.NEXT_CLERK_JWT_ISSUER_DOMAIN,
+			domain: CLERK_JWT_ISSUER_DOMAIN,
 			applicationID: "convex",
 		},
 	]
