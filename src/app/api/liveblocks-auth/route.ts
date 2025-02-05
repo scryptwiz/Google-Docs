@@ -26,12 +26,18 @@ export async function POST (request: Request) {
 	if (!isOwnwer && !isOrganizationMember) return new Response("Unauthorized", { status: 401 })
 
 	// Start an auth session inside your endpoint
+	const user_name = user.fullName ?? user.primaryEmailAddress?.emailAddress ?? "Anonymous";
+	const nameToNumber = user_name.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
+	const hue = Math.abs(nameToNumber % 360);
+	const user_color = `hsl(${hue}, 100%, 50%)`;
+
 	const session = liveblocks.prepareSession(
 		user.id,
 		{
 			userInfo: {
 				name: user.fullName ?? user.primaryEmailAddress?.emailAddress ?? "Anonymous",
-				avatar: user.imageUrl
+				avatar: user.imageUrl,
+				color: user_color,
 			}
 		}
 	);
