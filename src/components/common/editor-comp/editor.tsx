@@ -31,13 +31,22 @@ import { EditorStore } from '@/hooks/editor-store'
 import { Ruler } from './ruler'
 import { preloadedDocProps } from '@/constants/types'
 import { usePreloadedQuery } from 'convex/react'
-import { useLiveblocksExtension, FloatingToolbar } from "@liveblocks/react-tiptap";
+import { useLiveblocksExtension } from "@liveblocks/react-tiptap";
 import { Threads } from '@/app/docs/[_id]/threads'
+import { useStorage } from '@liveblocks/react'
+import { LEFT_MARGIN, RIGHT_MARGIN } from '@/constants/ui'
 
 const Editor = ({ preloadedDoc }: preloadedDocProps) => {
+  const leftMargin = useStorage((root) => root.leftMargin);
+  const rightMargin = useStorage((root) => root.rightMargin);
+
   const { setEditor } = EditorStore();
-  const liveblocks = useLiveblocksExtension();
   const docData = usePreloadedQuery(preloadedDoc)
+
+  const liveblocks = useLiveblocksExtension({
+    initialContent: docData?.initialContent,
+    offlineSupport_experimental: true,
+  });
 
   // create a lowlight instance with all languages loaded
   const lowlight = createLowlight(all)
@@ -60,7 +69,7 @@ const Editor = ({ preloadedDoc }: preloadedDocProps) => {
     onContentError ({ editor }) { setEditor(editor) },
     editorProps: {
       attributes: {
-        style: 'padding-left: 62px; padding-right: 62px;',
+        style: `padding-left: ${leftMargin ?? LEFT_MARGIN}px; padding-right: ${rightMargin ?? RIGHT_MARGIN}px;`,
         class: 'focus:outline-none print:border-0 bg-white border border-s2 flex flex-col min-h-[1056px] w-[816px] pt-10 pr-14 pb-10 cursor-text',
       },
     },
@@ -151,7 +160,6 @@ const Editor = ({ preloadedDoc }: preloadedDocProps) => {
         },
       }),
     ],
-    content: docData?.initialContent,
     //     content: `
     //             <h1>Hello World! 🌎️</h1>
     //             <blockquote>Nothing is impossible, the word itself says “I’m possible!” </blockquote>

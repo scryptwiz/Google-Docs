@@ -7,6 +7,7 @@ import DocMenuBar from "@/components/common/doc-menu-bar";
 import { OrganizationUserButton } from "../organization-user-button";
 import { DOCS_IMAGE } from "@/constants/images";
 import { preloadedDocProps } from "@/constants/types";
+import { Inbox } from "./inbox";
 import { Avatars } from "./avatar";
 
 const DocsNav = ({ preloadedDoc }: preloadedDocProps) => {
@@ -24,6 +25,7 @@ const DocsNav = ({ preloadedDoc }: preloadedDocProps) => {
 				</div>
 				<div className="flex">
 					<Avatars />
+					<Inbox />
 					<OrganizationUserButton />
 				</div>
 			</div>

@@ -5,7 +5,9 @@ import { LiveblocksProvider, RoomProvider, ClientSideSuspense } from "@liveblock
 import { useParams } from "next/navigation";
 import { FullPageLoader } from "@/components/Loader/fullPage-loader";
 import { toast } from "sonner";
-import { getUsers } from "@/app/actions/myAction";
+import { getDocuments, getUsers } from "@/app/actions/myAction";
+import { Id } from "../../../../convex/_generated/dataModel";
+import { LEFT_MARGIN, RIGHT_MARGIN } from "@/constants/ui";
 
 interface User {
 	id: string;
@@ -25,16 +27,33 @@ export function Room ({ children }: { children: ReactNode }) {
 
 	return (
 		<LiveblocksProvider
-			authEndpoint="/api/liveblocks-auth"
+			authEndpoint={async () => {
+				const endpoint = "/api/liveblocks-auth";
+				const room = _id as string;
+
+				const response = await fetch(endpoint, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ room })
+				});
+
+				return await response.json();
+			}}
 			resolveUsers={({ userIds }) => users.filter(user => userIds.includes(user.id))}
 			resolveMentionSuggestions={({ text }) =>
 				users
 					.filter(user => user.name.toLowerCase().includes(text.toLowerCase()))
 					.map(user => user.id)
 			}
-			resolveRoomsInfo={() => []}
+			resolveRoomsInfo={async ({ roomIds }) => {
+				const documents = await getDocuments(roomIds as Id<"documents">[]);
+				return documents.map(document => ({
+					id: document.id,
+					name: document.title,
+				}));
+			}}
 		>
-			<RoomProvider id={_id as string}>
+			<RoomProvider id={_id as string} initialStorage={{ leftMargin: LEFT_MARGIN, rightMargin: RIGHT_MARGIN, }}>
 				<ClientSideSuspense fallback={<FullPageLoader label="Room loading..." />}>
 					{children}
 				</ClientSideSuspense>

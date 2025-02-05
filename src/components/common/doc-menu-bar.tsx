@@ -109,8 +109,6 @@ const DocMenuBar = ({ preloadedDoc }: preloadedDocProps) => {
 			label: "File",
 			items: [
 				{ name: "New", icon: FileText, action: () => createNewDoc() },
-				{ name: "Open", icon: Folder, action: () => console.log("Opening document") },
-				{ name: "Save", icon: CloudUpload, action: () => console.log("Saving document") },
 				{
 					name: "Export",
 					icon: Download,

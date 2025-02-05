@@ -1,11 +1,21 @@
+import { LEFT_MARGIN, RIGHT_MARGIN } from "@/constants/ui";
+import { useMutation, useStorage } from "@liveblocks/react";
+import { position } from "html2canvas/dist/types/css/property-descriptors/position";
 import { ChevronDown } from "lucide-react";
 import { useRef, useState } from "react";
 
 const markers = Array.from({ length: 83 }, (_, i) => i);
 
 export const Ruler = () => {
-	const [leftMargin, setLeftMargin] = useState(56);
-	const [rightMargin, setRightMargin] = useState(56);
+	const leftMargin = useStorage((root) => root.leftMargin) ?? LEFT_MARGIN;
+	const setLeftMargin = useMutation(({ storage }, position: number) => {
+		storage.set("leftMargin", position);
+	}, [])
+	const rightMargin = useStorage((root) => root.rightMargin) ?? RIGHT_MARGIN;
+	const setRightMargin = useMutation(({ storage }, position: number) => {
+		storage.set("rightMargin", position);
+	}, [])
+
 	const [isDraggingLeft, setIsDraggingLeft] = useState(false);
 	const [isDraggingRight, setIsDraggingRight] = useState(false);
 	const rulerRef = useRef<HTMLDivElement>(null);
@@ -45,9 +55,9 @@ export const Ruler = () => {
 
 	const handleDoubleClick = (isLeft: boolean) => {
 		if (isLeft) {
-			setLeftMargin(56);
+			setLeftMargin(LEFT_MARGIN);
 		} else {
-			setRightMargin(56);
+			setRightMargin(RIGHT_MARGIN);
 		}
 	};
 
@@ -125,7 +135,7 @@ const Marker = ({
 }: MarkerProps) => {
 	return (
 		<div
-			className="absolute top-0 w-4 h-full cursor-ew-resize z-[5] group ml-2"
+			className="absolute top-0 h-full cursor-ew-resize z-[5] group"
 			style={{ [isLeft ? "left" : "right"]: `${position}px` }}
 			onMouseDown={onMouseDown}
 			onDoubleClick={onDoubleClick}

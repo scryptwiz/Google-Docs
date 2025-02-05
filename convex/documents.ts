@@ -82,6 +82,21 @@ export const getDocById = query({
 	},
 });
 
+export const getDocByIds = query({
+	args: { ids: v.array(v.id("documents")) },
+	handler: async (ctx, args) => {
+		const documents = [];
+
+		for (const id of args.ids) {
+			const document = await ctx.db.get(id);
+			if (document) documents.push({ id: document._id, title: document.title });
+			else documents.push({ id, title: "[Removed]" });
+		}
+
+		return documents;
+	},
+})
+
 const checkDocumentAccess = async (ctx: any, user: User, documentId: string) => {
 	const document = await ctx.db.get(documentId);
 	if (!document) throw new ConvexError("Document does not exist");
