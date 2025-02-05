@@ -43,7 +43,7 @@ export default function DocNameInput ({ preloadedDoc }: preloadedDocProps) {
 	}
 
 	return (
-		<div className='flex gap-3 items-center'>
+		<div className='flex gap-2 items-center'>
 			<div className="relative">
 				<span
 					role="textbox"
@@ -57,7 +57,7 @@ export default function DocNameInput ({ preloadedDoc }: preloadedDocProps) {
 					{docName}
 				</span>
 			</div>
-			<div className='flex gap-2'>
+			<div className='flex gap-1'>
 				{isUpdating && (
 					<span className='p-1.5'>
 						<Loader2 className="size-4 animate-spin text-gray-500" />
