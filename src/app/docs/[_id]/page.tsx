@@ -29,8 +29,10 @@ const page = async ({ params }: docPageIDProps) => {
     return (
         <Room>
             <div className="min-h-screen bg-s5">
-                <DocsNav preloadedDoc={preloadedDoc} />
-                <Toolbar />
+                <div className="fixed top-0 w-full z-50">
+                    <DocsNav preloadedDoc={preloadedDoc} />
+                    <Toolbar />
+                </div>
                 <Editor preloadedDoc={preloadedDoc} />
             </div>
         </Room>

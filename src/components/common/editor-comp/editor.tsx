@@ -194,6 +194,7 @@ const Editor = ({ preloadedDoc }: preloadedDocProps) => {
 
   return (
     <div className="size-full overflow-x-auto bg-s3 px-4 print:p-0 print:bg-white print:overflow-x-visible">
+      <div className='h-[132px]' />
       <Ruler />
       <div className="min-w-max flex justify-center w-[816px] print:py-0 py-4 mx-auto print:w-full print:min-w-0">
         <EditorContent editor={editor} />
