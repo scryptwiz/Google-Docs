@@ -45,7 +45,6 @@ const Editor = ({ preloadedDoc }: preloadedDocProps) => {
 
   const liveblocks = useLiveblocksExtension({
     initialContent: docData?.initialContent,
-    offlineSupport_experimental: true,
   });
 
   // create a lowlight instance with all languages loaded
