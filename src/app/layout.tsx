@@ -20,10 +20,9 @@ export const metadata: Metadata = {
   description: "docs.google.com",
 };
 
-console.log("Rendered on:", typeof window !== "undefined" ? "Client" : "Server");
 export default function RootLayout ({ children }: Readonly<{ children: React.ReactNode; }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <ClerkProvider publishableKey={CLERK_PUBLISHABLE_KEY}>
         <body className={`${roboto.variable} antialiased`}>
           {children}
